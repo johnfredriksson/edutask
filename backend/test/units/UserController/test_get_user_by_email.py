@@ -26,7 +26,7 @@ def test_getUserByEmail_emailValid(sut, email, expected):
     assert result == expected
 
 # Test with invalid email
-@pytest.mark.unittest
+@pytest.mark.unit
 @pytest.mark.parametrize(
     'email, response',
     [
