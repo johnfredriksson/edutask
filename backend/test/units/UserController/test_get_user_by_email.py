@@ -24,3 +24,19 @@ def sut(response):
 def test_getUserByEmail_emailValid(sut, email, expected):
     result = sut.get_user_by_email(email)
     assert result == expected
+
+# Test with invalid email
+@pytest.mark.unittest
+@pytest.mark.parametrize(
+    'email, response',
+    [
+        ('@domain.host', []),
+        ('local-partdomain.host', []),
+        ('local-part@.host', []),
+        ('local-part@domainhost', []),
+        ('local-part@.', [])
+    ]
+)
+def test_getUserByEmail_emailInvalid(sut, email):
+    with pytest.raises(ValueError):
+        sut.get_user_by_email(email)
