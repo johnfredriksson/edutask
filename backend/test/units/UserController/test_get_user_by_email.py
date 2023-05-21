@@ -40,3 +40,15 @@ def test_getUserByEmail_emailValid(sut, email, expected):
 def test_getUserByEmail_emailInvalid(sut, email):
     with pytest.raises(ValueError):
         sut.get_user_by_email(email)
+
+# Test with database failure
+@pytest.mark.unit
+@pytest.mark.parametrize(
+    'email, response',
+    [
+        ('local-part@domain.host', Exception)
+    ]
+)
+def test_getUserByEmail_databaseFailure(sut, email):
+    with pytest.raises(Exception):
+        sut.get_user_by_email(email)
